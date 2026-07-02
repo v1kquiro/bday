@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Tamara</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Karla:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void: #12081a;
+    --plum: #1f1029;
+    --plum-2: #2a1638;
+    --violet: #9b6bd9;
+    --violet-soft: #c9a8e8;
+    --rose: #e3b8c4;
+    --gold: #e8cba3;
+    --cream: #f3e9f7;
+    --line: rgba(201,168,232,0.18);
+    --shadow: rgba(10,4,16,0.55);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 0%, rgba(155,107,217,0.18), transparent 60%),
+      radial-gradient(ellipse 50% 35% at 85% 20%, rgba(227,184,196,0.10), transparent 60%),
+      var(--void);
+    color: var(--cream);
+    font-family: 'Karla', sans-serif;
+    font-weight:400;
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3, .display{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+
+  .eyebrow{
+    font-family:'Karla', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.28em;
+    font-size:0.7rem;
+    color: var(--violet-soft);
+    opacity:0.85;
+  }
+
+  section{
+    position:relative;
+    padding: 7rem 1.5rem;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  /* ---------- floating particles ---------- */
+  #particle-field{
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:0;
+    overflow:hidden;
+  }
+  .mote{
+    position:absolute;
+    bottom:-10%;
+    border-radius:50%;
+    background: radial-gradient(circle, var(--violet-soft), transparent 70%);
+    opacity:0;
+    animation: rise linear infinite;
+  }
+  @keyframes rise{
+    0%{ transform:translateY(0) translateX(0); opacity:0; }
+    10%{ opacity:0.5; }
+    90%{ opacity:0.35; }
+    100%{ transform:translateY(-110vh) translateX(var(--drift,20px)); opacity:0; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  .hero .eyebrow{ margin-bottom:1.6rem; }
+  .hero h1{
+    font-size: clamp(2.6rem, 8vw, 4.6rem);
+    color: var(--cream);
+    line-height:1.08;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color: var(--violet-soft);
+    background: linear-gradient(180deg, transparent 62%, rgba(155,107,217,0.35) 62%);
+  }
+  .hero .sub{
+    margin-top:1.6rem;
+    max-width:480px;
+    font-size:1.05rem;
+    color: var(--rose);
+    font-style:italic;
+  }
+  .scroll-cue{
+    margin-top:3.5rem;
+    font-size:0.7rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color: var(--violet-soft);
+    opacity:0.7;
+    animation: bob 2.6s ease-in-out infinite;
+  }
+  @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);} }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{
+    opacity:0;
+    transform: translateY(28px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- the letter ---------- */
+  .letter{
+    background: linear-gradient(180deg, var(--plum), var(--plum-2));
+    border:1px solid var(--line);
+    border-radius: 18px;
+    padding: 3rem 2.4rem;
+    box-shadow: 0 30px 60px -20px var(--shadow);
+    position:relative;
+  }
+  .letter::before{
+    content:"";
+    position:absolute; top:0; left:2.4rem; right:2.4rem; height:1px;
+    background: linear-gradient(90deg, transparent, var(--violet), transparent);
+  }
+  .letter .eyebrow{ display:block; margin-bottom:1.4rem; }
+  .letter p{
+    font-size:1.05rem;
+    color: var(--cream);
+    margin: 0 0 1.15rem 0;
+  }
+  .letter p:last-of-type{ margin-bottom:0; }
+  .letter .sign{
+    margin-top:2rem;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.3rem;
+    color: var(--violet-soft);
+  }
+  .word-loser, .word-silly{
+    color: var(--gold);
+    font-style:italic;
+  }
+
+  /* ---------- section headers ---------- */
+  .section-head{
+    text-align:center;
+    margin-bottom: 3rem;
+  }
+  .section-head h2{
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    margin-top:0.6rem;
+  }
+
+  /* ---------- reasons: scattered note cards ---------- */
+  .reasons{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.1rem;
+  }
+  @media (max-width: 620px){ .reasons{ grid-template-columns: 1fr; } }
+  .note{
+    background: rgba(42,22,56,0.55);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:1.5rem 1.4rem;
+    font-size:0.98rem;
+    color: var(--cream);
+    backdrop-filter: blur(4px);
+    transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+  }
+  .note:nth-child(3n+1){ transform: rotate(-0.6deg); }
+  .note:nth-child(3n+2){ transform: rotate(0.5deg); }
+  .note:nth-child(3n+3){ transform: rotate(-0.3deg); }
+  .note:hover{
+    transform: translateY(-4px) rotate(0deg);
+    border-color: var(--violet);
+    background: rgba(155,107,217,0.12);
+  }
+  .note .mark{ color: var(--violet-soft); font-family:'Fraunces', serif; font-style:italic; font-size:1.1rem; display:block; margin-bottom:0.4rem; }
+
+  /* ---------- memory lane ---------- */
+  .memory{
+    border-left: 2px solid var(--violet);
+    padding-left: 1.8rem;
+    margin-top: 1.5rem;
+  }
+  .memory .tag{
+    display:inline-block;
+    font-size:0.68rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color: var(--void);
+    background: var(--violet-soft);
+    padding: 0.3rem 0.65rem;
+    border-radius: 100px;
+    margin-bottom:0.9rem;
+  }
+
+  /* ---------- promise letter ---------- */
+  .promise{
+    background: linear-gradient(180deg, var(--plum-2), var(--plum));
+    border:1px solid rgba(232,203,163,0.3);
+    border-radius: 18px;
+    padding: 3rem 2.4rem;
+    box-shadow: 0 30px 60px -20px var(--shadow);
+    position:relative;
+  }
+  .promise::before{
+    content:"";
+    position:absolute; top:0; left:2.4rem; right:2.4rem; height:1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .promise .eyebrow{ color: var(--gold); display:block; margin-bottom:1.4rem; }
+  .promise h3{
+    font-size: clamp(1.6rem, 4.5vw, 2.1rem);
+    color: var(--cream);
+    margin-bottom:1.3rem;
+    line-height:1.25;
+  }
+  .promise p{
+    font-size:1.05rem;
+    color: var(--cream);
+    margin: 0 0 1.15rem 0;
+  }
+  .promise p:last-of-type{ margin-bottom:0; }
+  .promise .sign{
+    margin-top:2rem;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.3rem;
+    color: var(--gold);
+  }
+  .memory h3{
+    font-size:1.5rem;
+    color:var(--cream);
+    margin-bottom:0.8rem;
+  }
+  .memory p{ color: var(--rose); font-size:1rem; }
+  .bullets-echo{
+    margin-top:1.6rem;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.15rem;
+    color: var(--gold);
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- victory royale / signature closing ---------- */
+  .royale{
+    text-align:center;
+    padding: 5rem 1.5rem 6rem;
+  }
+  .royale-card{
+    position:relative;
+    border-radius: 22px;
+    padding: 3.5rem 2rem;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(155,107,217,0.35), transparent 60%),
+      linear-gradient(180deg, var(--plum-2), var(--void));
+    border: 1px solid var(--violet);
+    box-shadow: 0 0 0 1px rgba(155,107,217,0.15), 0 40px 80px -30px var(--shadow);
+    overflow:hidden;
+  }
+  .royale-card::after{
+    content:"";
+    position:absolute; inset:0;
+    background: repeating-linear-gradient(115deg, transparent, transparent 40px, rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 41px);
+    pointer-events:none;
+  }
+  .royale-eyebrow{
+    font-size:0.72rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color: var(--gold);
+  }
+  .royale h2{
+    font-size: clamp(2rem, 6vw, 3rem);
+    margin-top: 0.9rem;
+    color: var(--cream);
+  }
+  .royale h2 span{ color: var(--violet-soft); font-style:italic; }
+  .royale p{
+    max-width: 480px;
+    margin: 1.3rem auto 0;
+    color: var(--rose);
+    font-size:1.02rem;
+  }
+
+  /* ---------- easter egg button ---------- */
+  .egg-wrap{
+    text-align:center;
+    margin-top: 3.2rem;
+  }
+  .egg-btn{
+    font-family:'Karla', sans-serif;
+    font-weight:600;
+    letter-spacing:0.03em;
+    font-size:0.95rem;
+    color: var(--void);
+    background: linear-gradient(180deg, var(--violet-soft), var(--rose));
+    border:none;
+    padding: 0.9rem 1.9rem;
+    border-radius: 100px;
+    cursor:pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 12px 30px -12px rgba(155,107,217,0.6);
+  }
+  .egg-btn:hover{ transform: translateY(-2px); box-shadow: 0 16px 34px -12px rgba(155,107,217,0.75); }
+  .egg-btn:focus-visible{ outline: 2px solid var(--gold); outline-offset:3px; }
+  .egg-msg{
+    max-width: 480px;
+    margin: 1.6rem auto 0;
+    padding: 1.6rem 1.6rem;
+    border-radius: 14px;
+    background: rgba(42,22,56,0.6);
+    border: 1px solid var(--line);
+    color: var(--cream);
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.15rem;
+    display:none;
+  }
+  .egg-msg.show{ display:block; animation: fadeIn 0.6s ease; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+
+  footer{
+    text-align:center;
+    padding: 3rem 1.5rem 4rem;
+    color: var(--violet-soft);
+    font-size:0.8rem;
+    letter-spacing:0.05em;
+    opacity:0.7;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<div id="particle-field"></div>
+
+<section class="hero">
+  <div class="eyebrow"></div>
+  <h1>Happy Birthday,<br><em>Tamara</em></h1>
+  <p class="sub">My love. My beautiful girl</p>
+  <div class="scroll-cue">keep going ↓</div>
+</section>
+
+<section>
+  <div class="letter reveal">
+    <span class="eyebrow">before anything else</span>
+    <p>I need to say this first, because it matters more than any birthday message could: I'm sorry.</p>
+    <p>I said things I shouldn't have. I let my impulsiveness get louder than my care for you, and I acted in ways that made you feel small, or unsure, or like you had to brace yourself around me. That's on me, not on you, not on your feelings, not on the way you've been overthinking since. You were reacting to something real that I put there, and I hate that.</p>
+    <p>You didn't deserve to feel bad, especially not because of me. I don't want to explain it away or rush past it. I just want you to know I see it, I own it, and I'm working on being someone who doesn't put that weight on you again.</p>
+    <p>And even after all of that, you're still here. Still next to me. If that isn't proof of how rare you are, I don't know what is. You are someone worth waiting for, worth choosing carefully, worth loving with everything I've got.</p>
+    <p class="sign">I love you, Tamara. All of me does.</p>
+  </div>
+</section>
+
+<section>
+  <div class="section-head reveal">
+    <div class="eyebrow"></div>
+    <h2>Why it's you</h2>
+  </div>
+  <div class="reasons reveal">
+    <div class="note"><span class="mark">01</span>Because you call me your <span class="word-loser">loser</span> and somehow it sounds like the softest thing anyone's ever called me.</div>
+    <div class="note"><span class="mark">02</span>Because "<span class="word-silly">silly</span>" from you has never once felt like an insult — it feels like being known.</div>
+    <div class="note"><span class="mark">03</span>Because you stayed even when I gave you every reason to overthink whether you should.</div>
+    <div class="note"><span class="mark">04</span>Because your bad days don't scare me off, instead they make me want to be better at showing up for you.</div>
+    <div class="note"><span class="mark">05</span>Because somehow, out of every lobby, every random match, every stranger the internet could've put next to me, it was you.</div>
+    <div class="note"><span class="mark">06</span>Because I don't just love parts of you. I love the whole of you, even the parts you're still learning to love yourself.</div>
+  </div>
+</section>
+
+<section>
+  <div class="promise reveal">
+    <span class="eyebrow">one more thing, before you go</span>
+    <h3>You mean everything to me, Tamara. Not "a lot." Everything.</h3>
+    <p>I dhave not shown you that enough lately, and that's mine to fix, not yours to wonder about. So let me just say it plainly, on your birthday, with nothing else in the way: you are special. You are important. You are amazing, and not in a small, easy way, but in the way that actually changes a person's life. You've changed mine.</p>
+    <p>Since the day we met, you've taught me more than you probably realize. How to be patient. How to actually listen. How to care about someone in a way that isn't lazy or careless. How to be better, not because you demanded it, but because loving you made me want to be someone who deserves it.</p>
+    <p>I don't want to make those stupid mistakes again. I don't want to be the reason you feel bad, ever. That's not a quiet promise I'm making to myself, it's one I'm making to you, out loud, right here. I'm going to prove it. Not with one grand gesture, but with the small, everyday ones — the ones that add up to someone you never have to doubt.</p>
+    <p>You are the best thing in my life. Simple as that. Happy birthday, my love.</p>
+    <p class="sign">Every day, I choose you.</p>
+  </div>
+</section>
+
+
+<section class="royale">
+  <div class="royale-card reveal">
+    <div class="royale-eyebrow">the point of all this</div>
+    <h2>You're the most <span>special girl ever</span>.</h2>
+    <p>Out of everything that could've happened, everything that could've gone wrong, every version of this where we never talk again. I still ended up here, loving you. Every part of me loves every part of you. Happy birthday, my love. Thank you for still being next to me.</p>
+  </div>
+
+
+
+<footer>made with everything I've got, for Tamara</footer>
+
+<script>
+  // reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el=>io.observe(el));
+
+  // easter egg
+  const btn = document.getElementById('eggBtn');
+  const msg = document.getElementById('eggMsg');
+  btn.addEventListener('click', ()=>{
+    msg.classList.toggle('show');
+    btn.textContent = msg.classList.contains('show') ? "okay, silly, close it" : "click here, loser";
+  });
+
+  // ambient particles
+  const field = document.getElementById('particle-field');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!prefersReduced){
+    const count = window.innerWidth < 640 ? 14 : 26;
+    for(let i=0;i<count;i++){
+      const mote = document.createElement('div');
+      mote.className = 'mote';
+      const size = 3 + Math.random()*6;
+      mote.style.width = size+'px';
+      mote.style.height = size+'px';
+      mote.style.left = Math.random()*100+'%';
+      mote.style.setProperty('--drift', (Math.random()*60-30)+'px');
+      mote.style.animationDuration = (14+Math.random()*12)+'s';
+      mote.style.animationDelay = (Math.random()*16)+'s';
+      field.appendChild(mote);
+    }
+  }
+</script>
+
+</body>
+</html>
